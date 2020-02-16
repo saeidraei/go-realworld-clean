@@ -4,9 +4,9 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/err0r500/go-realworld-clean/domain"
-	userRW "github.com/err0r500/go-realworld-clean/implem/memory.userRW"
-	"github.com/err0r500/go-realworld-clean/testData"
+	"github.com/saeidraei/go-realworld-clean/domain"
+	userRW "github.com/saeidraei/go-realworld-clean/implem/memory.userRW"
+	"github.com/saeidraei/go-realworld-clean/testData"
 	"github.com/stretchr/testify/assert"
 )
 

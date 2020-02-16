@@ -5,7 +5,7 @@ package mock
 import (
 	"log"
 
-	"github.com/err0r500/go-realworld-clean/uc"
+	"github.com/saeidraei/go-realworld-clean/uc"
 	"github.com/golang/mock/gomock"
 )
 

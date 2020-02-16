@@ -4,9 +4,9 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/err0r500/go-realworld-clean/domain"
-	"github.com/err0r500/go-realworld-clean/implem/uc.mock"
-	"github.com/err0r500/go-realworld-clean/testData"
+	"github.com/saeidraei/go-realworld-clean/domain"
+	"github.com/saeidraei/go-realworld-clean/implem/uc.mock"
+	"github.com/saeidraei/go-realworld-clean/testData"
 	"github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/assert"
 )

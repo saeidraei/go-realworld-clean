@@ -1,6 +1,6 @@
 package uc
 
-import "github.com/err0r500/go-realworld-clean/domain"
+import "github.com/saeidraei/go-realworld-clean/domain"
 
 func (i interactor) ProfileUpdateFollow(userName, followeeName string, follow bool) (*domain.User, error) {
 	user, err := i.userRW.GetByName(userName)

@@ -1,6 +1,6 @@
 package uc
 
-import "github.com/err0r500/go-realworld-clean/domain"
+import "github.com/saeidraei/go-realworld-clean/domain"
 
 func (i interactor) ArticlePut(username string, slug string, fieldsToUpdate map[domain.ArticleUpdatableField]*string) (*domain.User, *domain.Article, error) {
 	article, err := i.getArticleAndCheckUser(username, slug)

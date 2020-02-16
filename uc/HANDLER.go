@@ -3,7 +3,7 @@ package uc
 import (
 	"log"
 
-	"github.com/err0r500/go-realworld-clean/domain"
+	"github.com/saeidraei/go-realworld-clean/domain"
 )
 
 type Handler interface {
@@ -14,6 +14,11 @@ type Handler interface {
 	CommentsLogic
 	FavoritesLogic
 	TagsLogic
+	UrlLogic
+}
+
+type UrlLogic interface {
+	UrlPost(url domain.Url) (*domain.Url, error)
 }
 
 type ProfileLogic interface {
@@ -64,6 +69,7 @@ type HandlerConstructor struct {
 	Slugger          Slugger
 	ArticleValidator ArticleValidator
 	TagsRW           TagsRW
+	UrlRW            UrlRW
 }
 
 func (c HandlerConstructor) New() Handler {
@@ -94,6 +100,9 @@ func (c HandlerConstructor) New() Handler {
 	if c.CommentRW == nil {
 		log.Fatal("missing CommentRW")
 	}
+	if c.UrlRW == nil {
+		log.Fatal("missing UrlRW")
+	}
 
 	return interactor{
 		logger:           c.Logger,
@@ -105,5 +114,6 @@ func (c HandlerConstructor) New() Handler {
 		articleValidator: c.ArticleValidator,
 		tagsRW:           c.TagsRW,
 		commentRW:        c.CommentRW,
+		urlRW:            c.UrlRW,
 	}
 }

@@ -1,7 +1,7 @@
 package uc
 
 import (
-	"github.com/err0r500/go-realworld-clean/domain"
+	"github.com/saeidraei/go-realworld-clean/domain"
 )
 
 func (i interactor) UserGet(userName string) (*domain.User, string, error) {

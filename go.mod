@@ -1,4 +1,4 @@
-module github.com/err0r500/go-realworld-clean
+module github.com/saeidraei/go-realworld-clean
 
 go 1.13
 

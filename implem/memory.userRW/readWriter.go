@@ -8,9 +8,9 @@ import (
 
 	"time"
 
-	"github.com/err0r500/go-realworld-clean/domain"
-	"github.com/err0r500/go-realworld-clean/testData"
-	"github.com/err0r500/go-realworld-clean/uc"
+	"github.com/saeidraei/go-realworld-clean/domain"
+	"github.com/saeidraei/go-realworld-clean/testData"
+	"github.com/saeidraei/go-realworld-clean/uc"
 	"github.com/spf13/viper"
 )
 

@@ -3,7 +3,7 @@ package uc_test
 import (
 	"testing"
 
-	"github.com/err0r500/go-realworld-clean/implem/uc.mock"
+	"github.com/saeidraei/go-realworld-clean/implem/uc.mock"
 	"github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/assert"
 )

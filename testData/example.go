@@ -3,7 +3,7 @@ package testData
 import (
 	"time"
 
-	"github.com/err0r500/go-realworld-clean/domain"
+	"github.com/saeidraei/go-realworld-clean/domain"
 )
 
 var rickBio = "Rick biography string"

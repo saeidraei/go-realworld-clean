@@ -1,7 +1,7 @@
 package formatter
 
 import (
-	"github.com/err0r500/go-realworld-clean/domain"
+	"github.com/saeidraei/go-realworld-clean/domain"
 )
 
 type Profile struct {

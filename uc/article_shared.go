@@ -3,7 +3,7 @@ package uc
 import (
 	"errors"
 
-	"github.com/err0r500/go-realworld-clean/domain"
+	"github.com/saeidraei/go-realworld-clean/domain"
 )
 
 func (i interactor) getArticleAndCheckUser(username, slug string) (*domain.Article, error) {

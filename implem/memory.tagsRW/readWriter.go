@@ -3,7 +3,7 @@ package tagsRW
 import (
 	"sync"
 
-	"github.com/err0r500/go-realworld-clean/uc"
+	"github.com/saeidraei/go-realworld-clean/uc"
 )
 
 type rw struct {

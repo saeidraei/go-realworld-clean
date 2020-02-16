@@ -2,19 +2,20 @@ package main
 
 import (
 	"fmt"
+	urlRw "github.com/saeidraei/go-realworld-clean/implem/memory.urlRW"
 
-	"github.com/err0r500/go-realworld-clean/implem/dummy.articleValidator"
-	"github.com/err0r500/go-realworld-clean/implem/gin.server"
-	"github.com/err0r500/go-realworld-clean/implem/gosimple.slugger"
-	"github.com/err0r500/go-realworld-clean/implem/jwt.authHandler"
-	"github.com/err0r500/go-realworld-clean/implem/logrus.logger"
-	"github.com/err0r500/go-realworld-clean/implem/memory.articleRW"
-	"github.com/err0r500/go-realworld-clean/implem/memory.commentRW"
-	"github.com/err0r500/go-realworld-clean/implem/memory.tagsRW"
-	"github.com/err0r500/go-realworld-clean/implem/memory.userRW"
-	"github.com/err0r500/go-realworld-clean/implem/user.validator"
-	"github.com/err0r500/go-realworld-clean/infra"
-	"github.com/err0r500/go-realworld-clean/uc"
+	"github.com/saeidraei/go-realworld-clean/implem/dummy.articleValidator"
+	"github.com/saeidraei/go-realworld-clean/implem/gin.server"
+	"github.com/saeidraei/go-realworld-clean/implem/gosimple.slugger"
+	"github.com/saeidraei/go-realworld-clean/implem/jwt.authHandler"
+	"github.com/saeidraei/go-realworld-clean/implem/logrus.logger"
+	"github.com/saeidraei/go-realworld-clean/implem/memory.articleRW"
+	"github.com/saeidraei/go-realworld-clean/implem/memory.commentRW"
+	"github.com/saeidraei/go-realworld-clean/implem/memory.tagsRW"
+	"github.com/saeidraei/go-realworld-clean/implem/memory.userRW"
+	"github.com/saeidraei/go-realworld-clean/implem/user.validator"
+	"github.com/saeidraei/go-realworld-clean/infra"
+	"github.com/saeidraei/go-realworld-clean/uc"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -78,6 +79,7 @@ func run() {
 			Slugger:          slugger.New(),
 			ArticleValidator: articleValidator.New(),
 			TagsRW:           tagsRW.New(),
+			UrlRW:            urlRw.New(),
 			CommentRW:        commentRW.New(),
 		}.New(),
 		authHandler,

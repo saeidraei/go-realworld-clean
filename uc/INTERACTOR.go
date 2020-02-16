@@ -1,7 +1,7 @@
 package uc
 
 import (
-	"github.com/err0r500/go-realworld-clean/domain"
+	"github.com/saeidraei/go-realworld-clean/domain"
 )
 
 // interactor : the struct that will have as properties all the IMPLEMENTED interfaces
@@ -16,6 +16,7 @@ type interactor struct {
 	slugger          Slugger
 	commentRW        CommentRW
 	tagsRW           TagsRW
+	urlRW            UrlRW
 }
 
 // Logger : only used to log stuff
@@ -42,6 +43,13 @@ type ArticleRW interface {
 	GetByAuthorsNameOrderedByMostRecentAsc(usernames []string) ([]domain.Article, error)
 	GetRecentFiltered(filters []domain.ArticleFilter) ([]domain.Article, error)
 	Delete(slug string) error
+}
+
+type UrlRW interface {
+	Create(domain.Url) (*domain.Url, error)
+	Save(domain.Url) (*domain.Url, error)
+	GetByID(ID string) (*domain.Url, error)
+	Delete(ID string) error
 }
 
 type CommentRW interface {

@@ -1,7 +1,7 @@
 package formatter
 
 import (
-	"github.com/err0r500/go-realworld-clean/domain"
+	"github.com/saeidraei/go-realworld-clean/domain"
 )
 
 const dateLayout = "2006-01-02T15:04:05.999Z"

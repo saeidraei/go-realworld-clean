@@ -1,6 +1,6 @@
 package uc
 
-import "github.com/err0r500/go-realworld-clean/domain"
+import "github.com/saeidraei/go-realworld-clean/domain"
 
 func (i interactor) ArticleGet(username, slug string) (*domain.User, *domain.Article, error) {
 	var user *domain.User

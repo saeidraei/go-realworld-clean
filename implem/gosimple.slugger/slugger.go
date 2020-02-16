@@ -1,8 +1,8 @@
 package slugger
 
 import (
-	"github.com/err0r500/go-realworld-clean/uc"
 	"github.com/gosimple/slug"
+	"github.com/saeidraei/go-realworld-clean/uc"
 )
 
 type slugger struct{}
