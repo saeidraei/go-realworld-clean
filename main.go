@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
-	urlRw "github.com/saeidraei/go-realworld-clean/implem/memory.urlRW"
+	urlRw "github.com/saeidraei/go-realworld-clean/implem/mysql.urlRW"
 
+	migrate "github.com/saeidraei/go-realworld-clean/db"
 	"github.com/saeidraei/go-realworld-clean/implem/dummy.articleValidator"
 	"github.com/saeidraei/go-realworld-clean/implem/gin.server"
 	"github.com/saeidraei/go-realworld-clean/implem/gosimple.slugger"
@@ -44,8 +45,17 @@ var versionCmd = &cobra.Command{
 	},
 }
 
+var migrationCmd = &cobra.Command{
+	Use:   "migrate",
+	Short: "Run the migration",
+	Run: func(cmd *cobra.Command, args []string) {
+		migrate.RunMigration()
+	},
+}
+
 func main() {
 	rootCmd.AddCommand(versionCmd)
+	rootCmd.AddCommand(migrationCmd)
 	cobra.OnInitialize(infra.CobraInitialization)
 
 	infra.LoggerConfig(rootCmd)
