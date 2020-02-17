@@ -7,13 +7,6 @@ import (
 )
 
 type Handler interface {
-	ProfileLogic
-	UserLogic
-	ArticlesLogic
-	ArticleLogic
-	CommentsLogic
-	FavoritesLogic
-	TagsLogic
 	UrlLogic
 }
 
@@ -62,7 +55,6 @@ type TagsLogic interface {
 
 type HandlerConstructor struct {
 	Logger           Logger
-	UserRW           UserRW
 	ArticleRW        ArticleRW
 	CommentRW        CommentRW
 	UserValidator    UserValidator
@@ -71,14 +63,12 @@ type HandlerConstructor struct {
 	ArticleValidator ArticleValidator
 	TagsRW           TagsRW
 	UrlRW            UrlRW
+	CacheRW          CacheRW
 }
 
 func (c HandlerConstructor) New() Handler {
 	if c.Logger == nil {
 		log.Fatal("missing Logger")
-	}
-	if c.UserRW == nil {
-		log.Fatal("missing UserRW")
 	}
 	if c.ArticleRW == nil {
 		log.Fatal("missing ArticleRW")
@@ -107,7 +97,6 @@ func (c HandlerConstructor) New() Handler {
 
 	return interactor{
 		logger:           c.Logger,
-		userRW:           c.UserRW,
 		articleRW:        c.ArticleRW,
 		userValidator:    c.UserValidator,
 		authHandler:      c.AuthHandler,
@@ -116,5 +105,6 @@ func (c HandlerConstructor) New() Handler {
 		tagsRW:           c.TagsRW,
 		commentRW:        c.CommentRW,
 		urlRW:            c.UrlRW,
+		cacheRW:          c.CacheRW,
 	}
 }

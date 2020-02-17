@@ -2,6 +2,7 @@ package uc
 
 import (
 	"github.com/saeidraei/go-realworld-clean/domain"
+	"time"
 )
 
 // interactor : the struct that will have as properties all the IMPLEMENTED interfaces
@@ -17,6 +18,7 @@ type interactor struct {
 	commentRW        CommentRW
 	tagsRW           TagsRW
 	urlRW            UrlRW
+	cacheRW          CacheRW
 }
 
 // Logger : only used to log stuff
@@ -50,6 +52,11 @@ type UrlRW interface {
 	Save(domain.Url) (*domain.Url, error)
 	GetByID(ID string) (*domain.Url, error)
 	Delete(ID string) error
+}
+
+type CacheRW interface {
+	Set(key string , value interface{},ttl time.Duration) error
+	Get(key string) (interface{}, error)
 }
 
 type CommentRW interface {

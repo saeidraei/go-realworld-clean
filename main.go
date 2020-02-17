@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	urlRw "github.com/saeidraei/go-realworld-clean/implem/mysql.urlRW"
+	cacheRw "github.com/saeidraei/go-realworld-clean/implem/redis.cacheRW"
 
 	migrate "github.com/saeidraei/go-realworld-clean/db"
 	"github.com/saeidraei/go-realworld-clean/implem/dummy.articleValidator"
@@ -13,7 +14,6 @@ import (
 	"github.com/saeidraei/go-realworld-clean/implem/memory.articleRW"
 	"github.com/saeidraei/go-realworld-clean/implem/memory.commentRW"
 	"github.com/saeidraei/go-realworld-clean/implem/memory.tagsRW"
-	"github.com/saeidraei/go-realworld-clean/implem/memory.userRW"
 	"github.com/saeidraei/go-realworld-clean/implem/user.validator"
 	"github.com/saeidraei/go-realworld-clean/infra"
 	"github.com/saeidraei/go-realworld-clean/uc"
@@ -82,7 +82,6 @@ func run() {
 	server.NewRouterWithLogger(
 		uc.HandlerConstructor{
 			Logger:           routerLogger,
-			UserRW:           userRW.New(),
 			ArticleRW:        articleRW.New(),
 			UserValidator:    validator.New(),
 			AuthHandler:      authHandler,
@@ -91,6 +90,7 @@ func run() {
 			TagsRW:           tagsRW.New(),
 			UrlRW:            urlRw.New(),
 			CommentRW:        commentRW.New(),
+			CacheRW:          cacheRw.New(),
 		}.New(),
 		authHandler,
 		routerLogger,
