@@ -5,8 +5,8 @@ import (
 )
 
 type Url struct {
-	ID      string `json:"title"`
-	Address string `json:"slug"`
+	ID      string `json:"id"`
+	Address string `json:"address"`
 }
 
 func NewUrlFromDomain(article domain.Url) Url {

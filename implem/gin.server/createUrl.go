@@ -10,21 +10,18 @@ import (
 
 type UrlReq struct {
 	Url struct {
-		ID      *string `json:"id"`
 		Address *string `json:"address"`
 	} `json:"url,required"`
 }
 
 func (req UrlReq) getEditableFields() map[domain.ArticleUpdatableField]*string {
 	return map[domain.ArticleUpdatableField]*string{
-		domain.ID:      req.Url.ID,
 		domain.Address: req.Url.Address,
 	}
 }
 
 func urlFromRequest(req *UrlReq) domain.Url {
 	return domain.Url{
-		ID:      *req.Url.ID,
 		Address: *req.Url.Address,
 	}
 }
