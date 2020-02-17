@@ -43,7 +43,7 @@ func (rH RouterHandler) SetRoutes(r *gin.Engine) {
 
 func (rH RouterHandler) urlRoutes(api *gin.RouterGroup) {
 	profiles := api.Group("url")
-	//profiles.GET("/:id", rH.c)
+	profiles.GET("/:id", rH.redirectUrl)
 	profiles.POST("", rH.createUrl) //
 }
 

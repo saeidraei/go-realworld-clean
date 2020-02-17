@@ -19,6 +19,7 @@ type Handler interface {
 
 type UrlLogic interface {
 	UrlPost(url domain.Url) (*domain.Url, error)
+	UrlGet(id string) (*domain.Url, error)
 }
 
 type ProfileLogic interface {
