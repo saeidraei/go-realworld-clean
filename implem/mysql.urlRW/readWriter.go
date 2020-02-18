@@ -29,6 +29,7 @@ func (rw rw) Create(url domain.Url) (*domain.Url, error) {
 	ins, err := rw.db.Query("insert into url(ID,Address) values(?,?)",url.ID,url.Address)
 	if err != nil {
 		fmt.Println(err)
+		panic(err.Error())
 	}
 	defer ins.Close()
 

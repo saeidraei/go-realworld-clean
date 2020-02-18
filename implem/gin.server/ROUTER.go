@@ -3,25 +3,24 @@ package server
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"github.com/gin-gonic/gin/render"
 	"github.com/saeidraei/go-realworld-clean/uc"
 )
 
 type RouterHandler struct {
-	ucHandler   uc.Handler
-	Logger      uc.Logger
+	ucHandler uc.Handler
+	Logger    uc.Logger
 }
 
 func NewRouter(i uc.Handler) RouterHandler {
 	return RouterHandler{
-		ucHandler:   i,
+		ucHandler: i,
 	}
 }
 
 func NewRouterWithLogger(i uc.Handler, logger uc.Logger) RouterHandler {
 	return RouterHandler{
-		ucHandler:   i,
-		Logger:      logger,
+		ucHandler: i,
+		Logger:    logger,
 	}
 }
 
@@ -38,20 +37,16 @@ func (rH RouterHandler) urlRoutes(api *gin.RouterGroup) {
 	profiles.POST("", rH.createUrl) //
 }
 
-const userNameKey = "userNameKey"
-
-
 func (rH RouterHandler) errorCatcher() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		c.Next()
 		if c.Writer.Status() > 399 {
-			c.Render(
-				c.Writer.Status(),
-				render.Data{
-					ContentType: "application/json; charset=utf-8",
-					Data:        []byte(`{"errors": {"body": ["wooops, something went wrong !"]}}`),
-				},
-			)
+			rb := c.Errors.JSON()
+			//if there was no error message show this message
+			if c.Errors == nil {
+				rb = gin.H{"error": "something went wrong"}
+			}
+			c.JSON(c.Writer.Status(), rb)
 		}
 	}
 }

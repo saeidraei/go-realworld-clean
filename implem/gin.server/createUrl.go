@@ -14,12 +14,6 @@ type UrlReq struct {
 	} `json:"url,required"`
 }
 
-func (req UrlReq) getEditableFields() map[domain.ArticleUpdatableField]*string {
-	return map[domain.ArticleUpdatableField]*string{
-		domain.Address: req.Url.Address,
-	}
-}
-
 func urlFromRequest(req *UrlReq) domain.Url {
 	return domain.Url{
 		Address: *req.Url.Address,
@@ -32,6 +26,7 @@ func (rH RouterHandler) createUrl(c *gin.Context) {
 	req := &UrlReq{}
 	if err := c.BindJSON(req); err != nil {
 		log(err)
+		c.Errors = append(c.Errors, &gin.Error{Err:err,Type:gin.ErrorTypePublic})
 		c.Status(http.StatusBadRequest)
 		return
 	}
@@ -39,6 +34,7 @@ func (rH RouterHandler) createUrl(c *gin.Context) {
 	url, err := rH.ucHandler.UrlPost(urlFromRequest(req))
 	if err != nil {
 		log(err)
+		c.Errors = append(c.Errors, &gin.Error{Err:err,Type:gin.ErrorTypePublic})
 		c.Status(http.StatusUnprocessableEntity)
 		return
 	}

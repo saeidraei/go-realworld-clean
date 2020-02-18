@@ -16,9 +16,10 @@ type UrlLogic interface {
 }
 
 type HandlerConstructor struct {
-	Logger           Logger
-	UrlRW            UrlRW
-	CacheRW          CacheRW
+	Logger       Logger
+	UrlRW        UrlRW
+	CacheRW      CacheRW
+	UrlValidator UrlValidator
 }
 
 func (c HandlerConstructor) New() Handler {
@@ -30,8 +31,9 @@ func (c HandlerConstructor) New() Handler {
 	}
 
 	return interactor{
-		logger:           c.Logger,
-		urlRW:            c.UrlRW,
-		cacheRW:          c.CacheRW,
+		logger:       c.Logger,
+		urlRW:        c.UrlRW,
+		cacheRW:      c.CacheRW,
+		urlValidator: c.UrlValidator,
 	}
 }

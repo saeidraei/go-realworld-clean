@@ -4,6 +4,7 @@ import (
 	"fmt"
 	urlRw "github.com/saeidraei/go-realworld-clean/implem/mysql.urlRW"
 	cacheRw "github.com/saeidraei/go-realworld-clean/implem/redis.cacheRW"
+	urlValidator "github.com/saeidraei/go-realworld-clean/implem/url.validator"
 
 	migrate "github.com/saeidraei/go-realworld-clean/db"
 	"github.com/saeidraei/go-realworld-clean/implem/gin.server"
@@ -73,9 +74,10 @@ func run() {
 
 	server.NewRouterWithLogger(
 		uc.HandlerConstructor{
-			Logger:           routerLogger,
-			UrlRW:            urlRw.New(),
-			CacheRW:          cacheRw.New(),
+			Logger:       routerLogger,
+			UrlRW:        urlRw.New(),
+			CacheRW:      cacheRw.New(),
+			UrlValidator: urlValidator.New(),
 		}.New(),
 		routerLogger,
 	).SetRoutes(ginServer.Router)

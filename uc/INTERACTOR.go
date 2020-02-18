@@ -11,6 +11,7 @@ type interactor struct {
 	logger           Logger
 	urlRW            UrlRW
 	cacheRW          CacheRW
+	urlValidator     UrlValidator
 }
 
 // Logger : only used to log stuff
@@ -29,4 +30,8 @@ type UrlRW interface {
 type CacheRW interface {
 	Set(key string , value interface{},ttl time.Duration) error
 	Get(key string) (interface{}, error)
+}
+
+type UrlValidator interface {
+	BeforeCreationCheck(url *domain.Url) error
 }
