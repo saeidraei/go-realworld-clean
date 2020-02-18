@@ -2,12 +2,6 @@ package server
 
 import (
 	"fmt"
-	"net/http"
-
-	"strings"
-
-	"errors"
-
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/render"
 	"github.com/saeidraei/go-realworld-clean/uc"
@@ -15,21 +9,18 @@ import (
 
 type RouterHandler struct {
 	ucHandler   uc.Handler
-	authHandler uc.AuthHandler
 	Logger      uc.Logger
 }
 
-func NewRouter(i uc.Handler, auth uc.AuthHandler) RouterHandler {
+func NewRouter(i uc.Handler) RouterHandler {
 	return RouterHandler{
 		ucHandler:   i,
-		authHandler: auth,
 	}
 }
 
-func NewRouterWithLogger(i uc.Handler, auth uc.AuthHandler, logger uc.Logger) RouterHandler {
+func NewRouterWithLogger(i uc.Handler, logger uc.Logger) RouterHandler {
 	return RouterHandler{
 		ucHandler:   i,
-		authHandler: auth,
 		Logger:      logger,
 	}
 }
@@ -49,48 +40,6 @@ func (rH RouterHandler) urlRoutes(api *gin.RouterGroup) {
 
 const userNameKey = "userNameKey"
 
-func (rH RouterHandler) jwtMiddleware() gin.HandlerFunc {
-	return func(c *gin.Context) {
-		jwt, err := getJWT(c.GetHeader("Authorization"))
-		if err != nil {
-			c.Status(http.StatusUnauthorized)
-			c.Abort()
-			return
-		}
-
-		userName, err := rH.authHandler.GetUserName(jwt)
-		if err != nil {
-			c.Status(http.StatusUnauthorized)
-			c.Abort()
-			return
-		}
-		c.SetAccepted()
-		c.Set(userNameKey, userName)
-		c.Next()
-	}
-}
-
-func (rH RouterHandler) getUserNameFromToken(c *gin.Context) string {
-	jwt, err := getJWT(c.GetHeader("Authorization"))
-	if err != nil {
-		return ""
-	}
-
-	userName, err := rH.authHandler.GetUserName(jwt)
-	if err != nil {
-		return ""
-	}
-
-	return userName
-}
-
-func getJWT(authHeader string) (string, error) {
-	splitted := strings.Split(authHeader, "Token ")
-	if len(splitted) != 2 {
-		return "", errors.New("malformed header")
-	}
-	return splitted[1], nil
-}
 
 func (rH RouterHandler) errorCatcher() gin.HandlerFunc {
 	return func(c *gin.Context) {
@@ -105,13 +54,6 @@ func (rH RouterHandler) errorCatcher() gin.HandlerFunc {
 			)
 		}
 	}
-}
-
-func (RouterHandler) getUserName(c *gin.Context) string {
-	if userName, ok := c.Keys[userNameKey].(string); ok {
-		return userName
-	}
-	return ""
 }
 
 // log is used to "partially apply" the title to the rH.logger.Log function

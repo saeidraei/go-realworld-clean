@@ -6,15 +6,8 @@ import (
 	cacheRw "github.com/saeidraei/go-realworld-clean/implem/redis.cacheRW"
 
 	migrate "github.com/saeidraei/go-realworld-clean/db"
-	"github.com/saeidraei/go-realworld-clean/implem/dummy.articleValidator"
 	"github.com/saeidraei/go-realworld-clean/implem/gin.server"
-	"github.com/saeidraei/go-realworld-clean/implem/gosimple.slugger"
-	"github.com/saeidraei/go-realworld-clean/implem/jwt.authHandler"
 	"github.com/saeidraei/go-realworld-clean/implem/logrus.logger"
-	"github.com/saeidraei/go-realworld-clean/implem/memory.articleRW"
-	"github.com/saeidraei/go-realworld-clean/implem/memory.commentRW"
-	"github.com/saeidraei/go-realworld-clean/implem/memory.tagsRW"
-	"github.com/saeidraei/go-realworld-clean/implem/user.validator"
 	"github.com/saeidraei/go-realworld-clean/infra"
 	"github.com/saeidraei/go-realworld-clean/uc"
 	"github.com/sirupsen/logrus"
@@ -73,7 +66,6 @@ func run() {
 		infra.DebugMode,
 	)
 
-	authHandler := jwt.New(viper.GetString("jwt.Salt"))
 	routerLogger := logger.NewLogger("TEST",
 		viper.GetString("log.level"),
 		viper.GetString("log.format"),
@@ -82,17 +74,9 @@ func run() {
 	server.NewRouterWithLogger(
 		uc.HandlerConstructor{
 			Logger:           routerLogger,
-			ArticleRW:        articleRW.New(),
-			UserValidator:    validator.New(),
-			AuthHandler:      authHandler,
-			Slugger:          slugger.New(),
-			ArticleValidator: articleValidator.New(),
-			TagsRW:           tagsRW.New(),
 			UrlRW:            urlRw.New(),
-			CommentRW:        commentRW.New(),
 			CacheRW:          cacheRw.New(),
 		}.New(),
-		authHandler,
 		routerLogger,
 	).SetRoutes(ginServer.Router)
 
