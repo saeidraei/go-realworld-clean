@@ -9,11 +9,11 @@ type Url struct {
 	Address string `json:"address"`
 }
 
-func NewUrlFromDomain(article domain.Url) Url {
+func NewUrlFromDomain(url domain.Url) Url {
 
 	return Url{
-		ID:      article.ID,
-		Address: article.Address,
+		ID:      url.ID,
+		Address: url.Address,
 	}
 }
 
