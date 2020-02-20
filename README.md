@@ -1,5 +1,5 @@
 # URL shortener in golang using clean architecture
-###how to run using docker-compose:
+### how to run using docker-compose:
 all you need to do is run `docker-compose up` in project root directory and after some time that images are pulled and some of them are build , project is up and running.
 
 you can use the [postman docs](https://documenter.getpostman.com/view/3010056/SzKTwJfa?version=latest) to explore the api.
