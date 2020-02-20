@@ -1,5 +1,4 @@
 # URL shortener in golang using clean architecture
-users data can be stored in mysql and mongodb.By default we are using mongodb for storing user data you can set the `server.userDriver` flag to `mysql` in order to change it to mysql.
 ###how to run using docker-compose:
 all you need to do is run `docker-compose up` in project root directory and after some time that images are pulled and some of them are build , project is up and running.
 
