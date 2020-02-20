@@ -43,6 +43,8 @@ func DatabaseConfig(cmd *cobra.Command) {
 	cmd.Flags().String("mysql.user", "root", "mysql user")
 	cmd.Flags().String("mysql.password", "testpassword", "mysql user password")
 	cmd.Flags().String("mysql.database", "clean", "mysql database")
+	cmd.Flags().String("redis.host", "redis", "redis host")
+	cmd.Flags().String("redis.port", "6379", "redis port")
 
 	viper.BindPFlags(cmd.Flags())
 }

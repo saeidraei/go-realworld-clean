@@ -1,6 +1,8 @@
 package urlRw
 
 import (
+	"fmt"
+	"github.com/spf13/viper"
 	_ "github.com/spf13/viper"
 	"time"
 
@@ -14,7 +16,7 @@ type rw struct {
 
 func New() uc.CacheRW {
 	client := redis.NewClient(&redis.Options{
-		Addr:     "redis:6379",
+		Addr:     fmt.Sprintf("%s:%s", viper.GetString("redis.host"), viper.GetString("redis.port")),
 		Password: "", // no password set
 		DB:       0,  // use default DB
 	})
@@ -22,7 +24,7 @@ func New() uc.CacheRW {
 		client: client,
 	}
 }
-func (rw rw) Set(key string , value interface{},ttl time.Duration) error {
+func (rw rw) Set(key string, value interface{}, ttl time.Duration) error {
 
 	err := rw.client.Set(key, value, ttl).Err()
 	if err != nil {
@@ -35,9 +37,9 @@ func (rw rw) Set(key string , value interface{},ttl time.Duration) error {
 func (rw rw) Get(key string) (interface{}, error) {
 	val, err := rw.client.Get(key).Result()
 	if err != nil {
-		return nil,err
+		return nil, err
 	}
 	//fmt.Println("cache hit")
 
-	return val,nil
+	return val, nil
 }
